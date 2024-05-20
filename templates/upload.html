@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <title>Trouver Mes Photos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Adjust the alpha (4th parameter) to control the opacity */
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body style="
+      font-family: 'Open Sans', sans-serif;
+      color: #000000;
+      padding-bottom: 50px;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    ">
+  <nav class="nav" style="
+        position: fixed;
+        background-color: #222;
+        top: 0;
+        left: 0;
+        right: 0;
+        transition: all 0.3s ease-in-out;
+        z-index: 999;
+      ">
+    <div class="container" style="
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 0;
+          transition: all 0.3s ease-in-out;
+          z-index: 999;
+        ">
+      <h1 class="logo">
+        <a href="/" style="
+              color: #fff;
+              text-decoration: none;
+              padding: 7px 15px;
+              transition: all 0.3s ease-in-out;
+            ">DOSSearch</a>
+      </h1>
+      <ul style="
+            display: flex;
+            list-style-type: none;
+            align-items: center;
+            justify-content: center;
+          ">
+        <li>
+          <a href="/" class="current" style="
+                color: #fff;
+                text-decoration: none;
+                padding: 7px 15px;
+                transition: all 0.3s ease-in-out;
+              ">Home</a>
+        </li>
+        <li>
+          <a href="#" style="
+                color: #fff;
+                text-decoration: none;
+                padding: 7px 15px;
+                transition: all 0.3s ease-in-out;
+              ">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="hero" style="
+        background-image: url(running-a-race2.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom center;
+        height: 100vh;
+        color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        margin-bottom: 20px;
+        ;
+      ">
+    <div class="container" style="z-index: 99;">
+
+      <form action="/upload" method="POST" enctype="multipart/form-data" style="
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+          ">
+        <h1 style="font-size: 42px; margin: -20px 20px 20px;color: white;">
+          Charger Vos Photos !
+        </h1>
+        <select name="competition_id" id="competition_id" style="
+              width: 100%;
+              padding: 10px;
+              margin-bottom: 20px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              box-sizing: border-box;
+            ">
+          <option value="0">Selectionner une competition</option>
+          <option value="1">5KM Femmes 2023</option>
+          <option value="2">5KM Hommes 2023</option>
+          <option value="3">10KM Femmes 2023</option>
+          <option value="4">10KM Hommes 2023</option>
+        </select>
+
+        <div class="input-group">
+          <input name="image" type="file" class="form-control" id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+        </div>
+        <button type="submit" style="
+            margin-top: 20px;
+              width: 50%;
+              padding: 10px;
+              border: none;
+              border-radius: 5px;
+              background-color: #f2930f;
+              color: #fff;
+              font-size: 16px;
+              font-weight: bold;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+            ">
+          Enregistrer
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+  <script>
+    // Check if the flash message is present
+    const flashMessages = get_flashed_messages(with_categories = true) | tojson;
+    const successMessage = flashMessages.find(msg => msg[0] === 'success');
+
+    if (successMessage) {
+      alert(successMessage[1]);
+    }
+  </script>
+
+
+
+
+
+  <script>
+
+
+    const nav = document.querySelector(".nav");
+    window.addEventListener("scroll", fixNav);
+
+    function fixNav() {
+      if (window.scrollY > nav.offsetHeight + 150) {
+        nav.classList.add("active");
+      } else {
+        nav.classList.remove("active");
+      }
+    }
+  </script>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+  {% if show_popup %}
+  <script>
+    Swal.fire({
+      position: "center-center",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  </script>
+  {% endif %}
+
+</body>
+
+
+</html>
